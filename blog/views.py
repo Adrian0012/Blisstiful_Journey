@@ -6,5 +6,15 @@ def index(request):
   data = {
     'posts' : Post.objects.all()
   }
-  return render(request, 'bliss_blog/index.html', data)
+  return render(request, 'blog/index.html', data)
 
+def about(request):
+  return render(request, 'blog/about.html')
+
+def contact(request):
+  return render(request, 'blog/contact.html')
+
+@login_required
+def view_post(request, pk):
+  post = Post.objects.get(pk=pk)
+  return render(request, 'blog/post.html', {'post' : post})
