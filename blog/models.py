@@ -13,6 +13,7 @@ class Post(models.Model):
   date_posted = models.DateTimeField(default=timezone.now)
   author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING)
   #you can check for more on_delete options
+  image = models.ImageField(default='default.jpg')
 
   def __str__(self):
     return self.title
