@@ -27,4 +27,4 @@ geckodriver.log
 
 *.pyc 
 
-tutorials
+.tutorials
