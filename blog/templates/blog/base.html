@@ -74,13 +74,17 @@
   </nav>
   {% endif %}
   <!-- Page Header -->
-  <header class="masthead" style="background-image: url('static/images/img2.jpg')">
+  {% block image %}
+  <header class="masthead" style="background-image: url('/static/images/img2.jpg')">
+  {% endblock image %}
     <div class="overlay"></div>
     <div class="container">
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
           <div class="site-heading">
+            {% block heading %}
             <h1>Blisstiful Journey</h1>
+            {% endblock heading %}
             <span class="subheading">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsum commodi eaque sapiente repellat reiciendis culpa neque sequi, delectus repellendus eos provident facere hic doloribus esse debitis. Cupiditate corporis quo odit?</span>
           </div>
         </div>
