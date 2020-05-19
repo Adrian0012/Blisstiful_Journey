@@ -3,8 +3,22 @@
 {% block title %} Home {% endblock title %}
 {% load socialaccount %}
 
-{% block content %}
+{% block image %} 
+<header class="masthead" style="background-image: url({{post.image.url}})">
+{% endblock image %}
 
-<h1>post</h1>
+{% block heading%} <h1>{{post.title}}</h1> {% endblock heading%}
+
+{% block content %}
+<article>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <p>{{post.content}}</p>
+      </div>
+    </div>
+  </div>
+</article>
+
 {% endblock content %}
 
