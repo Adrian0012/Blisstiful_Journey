@@ -26,5 +26,3 @@ geckodriver.log
 /backups
 
 *.pyc 
-
-.tutorials
