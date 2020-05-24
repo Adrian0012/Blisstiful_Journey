@@ -44,8 +44,8 @@ def about(request):
 
 #View Post
 @login_required
-def view_post(request, pk):
-  post = Post.objects.get(pk=pk)
+def view_post(request, slug):
+  post = Post.objects.get(slug=slug)
   comments = post.comments.filter(approved_comment=True)
 
   context = {'post' : post, 'comments' : comments,}
@@ -54,8 +54,8 @@ def view_post(request, pk):
 
 #Create comment for posts
 @login_required
-def create_comment(request, pk):
-  post = Post.objects.get(pk=pk)
+def create_comment(request, slug):
+  post = Post.objects.get(slug=slug)
   
   if request.method == "POST":
     form = CommentForm(request.POST)
@@ -64,7 +64,7 @@ def create_comment(request, pk):
       comment.author = request.user
       comment.post = post
       comment.save()
-      return redirect('blog-post-view', pk=post.pk)
+      return redirect('blog-post-view', slug=post.slug)
   else:
       form = CommentForm()
   return render(request, 'blog/create_comment.html', {'form': form, 'post' : post})

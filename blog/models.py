@@ -14,9 +14,13 @@ class Post(models.Model):
   author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING)
   #you can check for more on_delete options
   image = models.ImageField(default='default.jpg')
+  slug = models.SlugField(null=True, unique=True)
 
   def __str__(self):
     return self.title
+
+  def get_absolute_url(self):
+      return reverse('blog-post-view', kwargs={'slug': self.slug})
 
 class Comment(models.Model):
   post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
