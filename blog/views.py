@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Post, Comment
+from .models import Post, Comment, Category
 from .forms import CommentForm
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
@@ -8,7 +8,8 @@ from django.contrib import messages
 #Index page
 def index(request):
   data = {
-    'posts' : Post.objects.all()
+    'posts' : Post.objects.all(),
+    'categories' : Category.objects.all()
   }
   return render(request, 'blog/index.html', data)
 
@@ -51,6 +52,19 @@ def view_post(request, slug):
   context = {'post' : post, 'comments' : comments,}
 
   return render(request, 'blog/post.html', context)
+
+#Category Detail
+@login_required
+def view_category(request, slug):
+  category = Category.objects.get(slug=slug)
+  posts = Post.objects.filter(category=category)
+
+  context = {
+    'category' : category,
+    'posts' : posts
+  }
+
+  return render(request, 'blog/category_view.html', context)
 
 #Create comment for posts
 @login_required
