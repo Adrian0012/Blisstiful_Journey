@@ -1,0 +1,29 @@
+{% extends "blog/base.html" %}
+{% load static %}
+{% block title %} Home {% endblock title %}
+{% load socialaccount %}
+
+{% block image %} 
+<header class="masthead" style="background-image: url({{post.image.url}})">
+{% endblock image %}
+
+{% block heading%} <h1>{{category.name}}</h1> {% endblock heading%}
+
+<!-- {% block subheading%} <span class="subheading">{{post.category.name}}</span> {% endblock subheading%} -->
+
+{% block content %}
+<article>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        {% for post in posts %}
+        <a href="/post/{{post.slug}}">{{post.content}}</a>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</article>
+<hr>
+
+{% endblock content %}
+

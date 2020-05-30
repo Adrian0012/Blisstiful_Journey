@@ -9,6 +9,8 @@
 
 {% block heading%} <h1>{{post.title}}</h1> {% endblock heading%}
 
+{% block subheading%} <span class="subheading">{{post.category.name}}</span> {% endblock subheading%}
+
 {% block content %}
 <article>
   <div class="container">

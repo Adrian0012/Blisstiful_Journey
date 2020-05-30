@@ -7,14 +7,26 @@ from django.conf import settings
 class User(AbstractUser):
   pass
 
+class Category(models.Model):
+  name = models.CharField(max_length=100)
+  slug = models.SlugField(null=True, unique=True, max_length=250)
+
+  def __str__(self):
+    return self.name
+
+  class Meta:
+    ordering = ('name',)
+    verbose_name = 'category'
+    verbose_name_plural = 'categories'
+
 class Post(models.Model):
   title = models.CharField(max_length=100)
   content = models.TextField()
   date_posted = models.DateTimeField(default=timezone.now)
   author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING)
-  #you can check for more on_delete options
   image = models.ImageField(default='default.jpg')
-  slug = models.SlugField(null=True, unique=True)
+  slug = models.SlugField(null=True, unique=True, max_length=250)
+  category = models.ForeignKey(Category, on_delete=models.DO_NOTHING)
 
   def __str__(self):
     return self.title
