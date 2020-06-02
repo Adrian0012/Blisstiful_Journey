@@ -1,0 +1,89 @@
+<div class='container main-comment-section'>
+  <div class="row">
+    <div class="col-lg-8 col-md-10 mx-auto">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto" id="comment-form" style="display: none;">
+            <form method="post" action="."> 
+              {% csrf_token %}
+              <div class='col-md-4 offset-md-4'>
+                <h6>Leave your comment</h6>
+              </div>
+              <br>
+              <div class='col'>
+                {{form.content}}
+                <br>
+                <button type="submit" class='comment-form-btn btn btn-primary'>Submit</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <hr>
+      <div>
+        {% for comment in comments %}
+      <!-- <p class="post-meta">Posted by
+        <a href="#">{{comment.author}}</a>
+          {{comment.date_posted}}
+      </p>
+        <p>{{comment.content}}</p> -->
+        <!-- <button class="reply-btn">
+          Reply
+        </button> -->
+
+        <div class="card comment-card shadow-sm p-3 mb-5 bg-white rounded">
+          <div class="card-body">
+            <input data-comment-id={{comment.id}} class='comment-id' style='display: none;' />
+            <h5 class="card-title">{{comment.author}}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">{{comment.date_posted}}</h6>
+            <p class="card-text">{{comment.content}}</p>
+            <a class="card-link"><button class="reply-button">Reply</button></a>
+            <hr>
+            <div class='reply-border'>
+              {% for reply in comment.replies.all %}
+              <section class="reply-section">
+                <h5 class="card-title ml-4 custom-h5">by- {{reply.author}}</h5>
+                <p class="card-text ml-4 custom-p">{{reply}}</p>
+                <h6 class="card-subtitle mb-2 text-muted ml-4 custom-h6">{{reply.date_posted}}</h6>
+              </section>
+
+      
+              {% endfor %}
+              <div class="form-group row reply-form" style="display: none;">
+                <form method="post" action="."> 
+                  {% csrf_token %}
+                  <input type="hidden" name="comment_id" value="{{comment.id}}">
+                  <div class='col-md-4 offset-md-4'>
+                    <h6>Reply</h6>
+                  </div>
+                  <br>
+                  <div class='col'>
+                    {{form.content}}
+                    <br>
+                    <button type="submit" class='comment-form-btn btn btn-primary'>Submit</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        
+        <!-- <div class="container">
+          {% for reply in comment.replies.all %}
+          <p class="post-meta">by- {{reply.author}}
+            <p>{{reply}}</p>
+              {{reply.date_posted}}
+          </p>
+          {% endfor %}
+        </div> -->
+        
+      {% endfor %}
+    </div>
+
+    </div>
+  </div>
+</div>
+
+{% block scripts %}
+{% endblock scripts%}
