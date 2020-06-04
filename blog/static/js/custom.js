@@ -18,8 +18,8 @@ $('.comment-btn').click(function(){
 $(document).on('submit', '#comment-form', function(event){
   event.preventDefault();
   $.ajax({
-    type: 'POST',
-    url: $(this).attr('action'),
+    method: 'POST',
+    url: `/post/${slug}/`,
     data: $(this).serialize(),
     dataType: 'json',
     success: function(response) {
@@ -42,7 +42,7 @@ $(document).on('submit', '.reply-form', function(event){
 
   $.ajax({
     method: 'POST',
-    url: `/post/${slug}/comment`,
+    url: `/post/${slug}/`,
     data: $(this).serialize(),
     dataType: 'json',
     success: function(response) {
