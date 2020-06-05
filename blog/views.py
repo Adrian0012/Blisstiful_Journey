@@ -50,7 +50,7 @@ def about(request):
 def view_post(request, slug):
 
   post = Post.objects.get(slug=slug)
-  comments = post.comments.filter(approved_comment=True, reply=None).order_by('-date_posted')
+  comments = post.comments.filter(post=post, reply=None).order_by('-date_posted')
 
   if request.method == "POST":
     form = CommentForm(request.POST)
