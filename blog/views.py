@@ -48,26 +48,26 @@ def about(request):
 #View Post
 @login_required
 def view_post(request, slug):
+
   post = Post.objects.get(slug=slug)
   comments = post.comments.filter(approved_comment=True, reply=None).order_by('-date_posted')
 
   if request.method == "POST":
     form = CommentForm(request.POST)
     if form.is_valid():
-      content = request.POST.get('content')
-      print(content)
+      comment = form.save(commit=False)
       reply_id = request.POST.get('comment_id')
       data = None
+
       if reply_id:
         data = Comment.objects.get(id=reply_id)
-
-      comment = Comment.objects.create(post=post, user=request.user, content=content, reply=data)
-      comment.save()
-    else:
-      print (form.errors)
-
+      
+      comment.author = request.user
+      comment.post = post
+      comment.reply = data
+      comment.save()    
   else:
-    form = CommentForm()
+      form = CommentForm()
 
   context = {
     'post' : post,
@@ -78,8 +78,41 @@ def view_post(request, slug):
   if request.is_ajax():
     html = render_to_string('blog/comments.html', context, request=request)
     return JsonResponse({ 'form' : html })
+  else:  
+    return render(request, 'blog/post.html', context)
 
-  return render(request, 'blog/post.html', context)
+  # post = Post.objects.get(slug=slug)
+  # comments = post.comments.filter(approved_comment=True, reply=None).order_by('-date_posted')
+
+  # if request.method == "POST":
+  #   form = CommentForm(request.POST)
+  #   print(request.POST.get('content'))
+  #   if form.is_valid():
+  #     content = request.POST.get('content')
+  #     reply_id = request.POST.get('comment_id')
+  #     data = None
+  #     if reply_id:
+  #       data = Comment.objects.get(id=reply_id)
+
+  #     comment = Comment.objects.create(post=post, user=request.user, content=content, reply=data)
+  #     comment.save()
+  #   else:
+  #     print (form.errors)
+
+  # else:
+  #   form = CommentForm()
+
+  # context = {
+  #   'post' : post,
+  #   'comments' : comments,
+  #   'form' : form
+  # }
+
+  # if request.is_ajax():
+  #   html = render_to_string('blog/comments.html', context, request=request)
+  #   return JsonResponse({ 'form' : html })
+
+  # return render(request, 'blog/post.html', context)
 
 #Category Detail
 @login_required

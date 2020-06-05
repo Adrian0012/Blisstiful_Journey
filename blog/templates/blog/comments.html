@@ -41,7 +41,7 @@
               <div class="form-group row reply-form" style="display: none;">
                 <form method="post" action="."> 
                   {% csrf_token %}
-                  <input type="hidden" name="comment_id" value="{{comment.id}}">
+                  <input type="hidden" name="comment_id" class='reply-comment-id' value="{{comment.id}}">
                   <div class='col-md-4 offset-md-4'>
                     <h6>Reply</h6>
                   </div>
@@ -56,17 +56,6 @@
             </div>
           </div>
         </div>
-
-        
-        <!-- <div class="container">
-          {% for reply in comment.replies.all %}
-          <p class="post-meta">by- {{reply.author}}
-            <p>{{reply}}</p>
-              {{reply.date_posted}}
-          </p>
-          {% endfor %}
-        </div> -->
-        
       {% endfor %}
     </div>
 

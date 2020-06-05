@@ -17,14 +17,21 @@ $('.comment-btn').click(function(){
 
 $(document).on('submit', '#comment-form', function(event){
   event.preventDefault();
+  const slug = $('#slug').first().data('slug');
+  console.log(event, $(event.target))
+  const data = {
+    content: $(event.target).find('.form-control').val()
+   }
+
   $.ajax({
     method: 'POST',
     url: `/post/${slug}/`,
-    data: $(this).serialize(),
+    data: data,
     dataType: 'json',
     success: function(response) {
       $('main-comment-section').html(response['form']);
       $('textarea').val('');
+      $('#comment-form').toggle();
     },
     error: function(rs, e) {
       console.log(rs.responseText);
@@ -36,14 +43,16 @@ $(document).on('submit', '.reply-form', function(event){
   const slug = $('#slug').first().data('slug');
 
   event.preventDefault();
+  console.log(event)
  const data = {
-  comment_id: $(event.target).parents('.card-body').children('.comment-id').data('comment-id')
+  comment_id: $(event.target).find('.reply-comment-id').val(),
+  content: $(event.target).find('.form-control').val()
  }
 
   $.ajax({
     method: 'POST',
     url: `/post/${slug}/`,
-    data: $(this).serialize(),
+    data: data,
     dataType: 'json',
     success: function(response) {
       $(event.target).parents('.reply-form').hide()
