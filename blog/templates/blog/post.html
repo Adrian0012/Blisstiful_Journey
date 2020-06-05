@@ -12,6 +12,7 @@
 {% block subheading%} <span class="subheading">{{post.category.name}}</span> {% endblock subheading%}
 
 {% block content %}
+<input data-slug={{post.slug}} id='slug' style='display: none;'>
 <article>
   <div class="container">
     <div class="row">
@@ -19,30 +20,13 @@
         <p>{{post.content}}</p>
         <button>Like</button>
         <a href="#">Share</a>
-        <a href="/post/{{post.slug}}/comment">Comment</a>
+        <button class="comment-btn">Comment</button>
+        {{ comments.count }} Comment{{ comments|pluralize }}
+        <!-- <a href="/post/{{post.slug}}/comment">Comment</a> -->
       </div>
     </div>
   </div>
 </article>
-<hr>
-<div class='container'>
-  <div class="row">
-    <div class="col-lg-8 col-md-10 mx-auto">
-      <h1>Comments: </h1>
-      <hr>
-      {% for comment in comments %}
-      <p class="post-meta">Posted by
-        <a href="#">{{comment.author}}</a>
-          {{comment.date_posted}}
-      </p>
 
-        <p>{{comment.content}}</p> 
-      
-        <hr>
-      {% endfor %}
-    </div>
-  </div>
-</div>
-
+{% include "blog/comments.html" %}
 {% endblock content %}
-

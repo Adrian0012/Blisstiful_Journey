@@ -4,6 +4,8 @@ from .forms import CommentForm
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 from django.contrib import messages
+from django.template.loader import render_to_string
+from django.http import JsonResponse
 
 #Index page
 def index(request):
@@ -46,12 +48,71 @@ def about(request):
 #View Post
 @login_required
 def view_post(request, slug):
+
   post = Post.objects.get(slug=slug)
-  comments = post.comments.filter(approved_comment=True)
+  comments = post.comments.filter(approved_comment=True, reply=None).order_by('-date_posted')
 
-  context = {'post' : post, 'comments' : comments,}
+  if request.method == "POST":
+    form = CommentForm(request.POST)
+    if form.is_valid():
+      comment = form.save(commit=False)
+      reply_id = request.POST.get('comment_id')
+      data = None
 
-  return render(request, 'blog/post.html', context)
+      if reply_id:
+        data = Comment.objects.get(id=reply_id)
+      
+      comment.author = request.user
+      comment.post = post
+      comment.reply = data
+      comment.save()    
+  else:
+      form = CommentForm()
+
+  context = {
+    'post' : post,
+    'comments' : comments,
+    'form' : form
+  }
+
+  if request.is_ajax():
+    html = render_to_string('blog/comments.html', context, request=request)
+    return JsonResponse({ 'form' : html })
+  else:  
+    return render(request, 'blog/post.html', context)
+
+  # post = Post.objects.get(slug=slug)
+  # comments = post.comments.filter(approved_comment=True, reply=None).order_by('-date_posted')
+
+  # if request.method == "POST":
+  #   form = CommentForm(request.POST)
+  #   print(request.POST.get('content'))
+  #   if form.is_valid():
+  #     content = request.POST.get('content')
+  #     reply_id = request.POST.get('comment_id')
+  #     data = None
+  #     if reply_id:
+  #       data = Comment.objects.get(id=reply_id)
+
+  #     comment = Comment.objects.create(post=post, user=request.user, content=content, reply=data)
+  #     comment.save()
+  #   else:
+  #     print (form.errors)
+
+  # else:
+  #   form = CommentForm()
+
+  # context = {
+  #   'post' : post,
+  #   'comments' : comments,
+  #   'form' : form
+  # }
+
+  # if request.is_ajax():
+  #   html = render_to_string('blog/comments.html', context, request=request)
+  #   return JsonResponse({ 'form' : html })
+
+  # return render(request, 'blog/post.html', context)
 
 #Category Detail
 @login_required
@@ -66,22 +127,37 @@ def view_category(request, slug):
 
   return render(request, 'blog/category_view.html', context)
 
-#Create comment for posts
-@login_required
-def create_comment(request, slug):
-  post = Post.objects.get(slug=slug)
-  
-  if request.method == "POST":
-    form = CommentForm(request.POST)
-    if form.is_valid():
-      comment = form.save(commit=False)
-      comment.author = request.user
-      comment.post = post
-      comment.save()
-      return redirect('blog-post-view', slug=post.slug)
-  else:
-      form = CommentForm()
-  return render(request, 'blog/create_comment.html', {'form': form, 'post' : post})
+# Create comment for posts
+# @login_required
+# def create_comment(request, slug):
+#   if request.method == "POST":
+#     form = CommentForm(request.POST)
+#     if form.is_valid():
+#       comment = form.save(commit=False)
+#       reply_id = request.POST.get('comment_id')
+#       data = None
+
+#       if reply_id:
+#         data = Comment.objects.get(id=reply_id)
+      
+#       comment.author = request.user
+#       comment.post = post
+#       comment.reply = data
+#       comment.save()    
+#   else:
+#       form = CommentForm()
+
+#   context = {
+#     'post' : post,
+#     'comments' : comments,
+#     'form' : form
+#   }
+
+#   if request.is_ajax():
+#     html = render_to_string('blog/comments.html', context, request=request)
+#     return JsonResponse({ 'form' : html })
+#   else:  
+#     return render(request, 'blog/post.html', context)
 
 #Update comments for posts
 def update_comment(request):
