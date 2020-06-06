@@ -18,11 +18,14 @@
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
         <p>{{post.content}}</p>
-        <button>Like</button>
+        
         <a href="#">Share</a>
         <button class="comment-btn">Comment</button>
         {{ comments.count }} Comment{{ comments|pluralize }}
-        <!-- <a href="/post/{{post.slug}}/comment">Comment</a> -->
+
+        <div class="like-section">
+          {% include "blog/post_likes.html" %}
+        </div>
       </div>
     </div>
   </div>

@@ -45,12 +45,15 @@ def contact(request):
 def about(request):
   return render(request, 'blog/about.html')
 
-#View Post
+#View/Comment/Reply Post
 @login_required
 def view_post(request, slug):
-
   post = Post.objects.get(slug=slug)
   comments = post.comments.filter(post=post, reply=None).order_by('-date_posted')
+
+  is_liked = False
+  if post.likes.filter(id=request.user.id).exists():
+    is_liked = True
 
   if request.method == "POST":
     form = CommentForm(request.POST)
@@ -72,7 +75,9 @@ def view_post(request, slug):
   context = {
     'post' : post,
     'comments' : comments,
-    'form' : form
+    'form' : form,
+    'is_liked' : is_liked,
+    'total_likes' : post.total_likes()
   }
 
   if request.is_ajax():
@@ -81,39 +86,28 @@ def view_post(request, slug):
   else:  
     return render(request, 'blog/post.html', context)
 
-  # post = Post.objects.get(slug=slug)
-  # comments = post.comments.filter(approved_comment=True, reply=None).order_by('-date_posted')
+#Post Likes
+@login_required
+def post_like(request, slug):
+  post = Post.objects.get(slug=slug)
+  is_liked = False
 
-  # if request.method == "POST":
-  #   form = CommentForm(request.POST)
-  #   print(request.POST.get('content'))
-  #   if form.is_valid():
-  #     content = request.POST.get('content')
-  #     reply_id = request.POST.get('comment_id')
-  #     data = None
-  #     if reply_id:
-  #       data = Comment.objects.get(id=reply_id)
+  if post.likes.filter(id=request.user.id).exists():
+    post.likes.remove(request.user)
+    is_liked = False
+  else:
+    post.likes.add(request.user)
+    is_liked = True
 
-  #     comment = Comment.objects.create(post=post, user=request.user, content=content, reply=data)
-  #     comment.save()
-  #   else:
-  #     print (form.errors)
-
-  # else:
-  #   form = CommentForm()
-
-  # context = {
-  #   'post' : post,
-  #   'comments' : comments,
-  #   'form' : form
-  # }
-
-  # if request.is_ajax():
-  #   html = render_to_string('blog/comments.html', context, request=request)
-  #   return JsonResponse({ 'form' : html })
-
-  # return render(request, 'blog/post.html', context)
-
+  context = {
+    'post' : post,
+    'is_liked' : is_liked,
+    'total_likes' : post.total_likes()
+  }
+  if request.is_ajax():
+    html = render_to_string('blog/post_likes.html', context, request=request)
+    return JsonResponse({ 'form' : html })
+    
 #Category Detail
 @login_required
 def view_category(request, slug):
@@ -126,38 +120,6 @@ def view_category(request, slug):
   }
 
   return render(request, 'blog/category_view.html', context)
-
-# Create comment for posts
-# @login_required
-# def create_comment(request, slug):
-#   if request.method == "POST":
-#     form = CommentForm(request.POST)
-#     if form.is_valid():
-#       comment = form.save(commit=False)
-#       reply_id = request.POST.get('comment_id')
-#       data = None
-
-#       if reply_id:
-#         data = Comment.objects.get(id=reply_id)
-      
-#       comment.author = request.user
-#       comment.post = post
-#       comment.reply = data
-#       comment.save()    
-#   else:
-#       form = CommentForm()
-
-#   context = {
-#     'post' : post,
-#     'comments' : comments,
-#     'form' : form
-#   }
-
-#   if request.is_ajax():
-#     html = render_to_string('blog/comments.html', context, request=request)
-#     return JsonResponse({ 'form' : html })
-#   else:  
-#     return render(request, 'blog/post.html', context)
 
 #Update comments for posts
 def update_comment(request):
