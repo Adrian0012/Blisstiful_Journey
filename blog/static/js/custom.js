@@ -7,18 +7,21 @@ $(document).ready(function() {
     }
 });
 
-$('.reply-button').click(e => {
-  $(e.target).parents('.card-body').children('.reply-border').children('.reply-form').toggle()
-});
+assingHandlers = () => {
+  $('.reply-button').click(e => {
+    $(e.target).parents('.card-body').find('.reply-form').toggle()
+  });
+  
+  $('.comment-btn').click(function(){
+    $('#comment-form').toggle();
+  });
+};
 
-$('.comment-btn').click(function(){
-  $('#comment-form').toggle();
-});
+assingHandlers();
 
 $(document).on('submit', '#comment-form', function(event){
   event.preventDefault();
   const slug = $('#slug').first().data('slug');
-  console.log(event, $(event.target))
   const data = {
     content: $(event.target).find('.form-control').val()
    }
@@ -29,9 +32,10 @@ $(document).on('submit', '#comment-form', function(event){
     data: data,
     dataType: 'json',
     success: function(response) {
-      $('main-comment-section').html(response['form']);
-      $('textarea').val('');
       $('#comment-form').toggle();
+      $('.main-comment-section').html(response['form']);
+      assingHandlers();
+      $('textarea').val('');
     },
     error: function(rs, e) {
       console.log(rs.responseText);
@@ -43,8 +47,7 @@ $(document).on('submit', '.reply-form', function(event){
   const slug = $('#slug').first().data('slug');
 
   event.preventDefault();
-  console.log(event)
- const data = {
+  const data = {
   comment_id: $(event.target).find('.reply-comment-id').val(),
   content: $(event.target).find('.form-control').val()
  }
@@ -56,8 +59,29 @@ $(document).on('submit', '.reply-form', function(event){
     dataType: 'json',
     success: function(response) {
       $(event.target).parents('.reply-form').hide()
-      $('main-comment-section').html(response['form']);
+      $('.main-comment-section').html(response['form']);
+      assingHandlers();
       $('textarea').val('');
+    },
+    error: function(rs, e) {
+      console.log(rs.responseText);
+    },
+  })
+  event.preventDefault();
+})
+
+$(document).on('click', '#like', function(event){
+  event.preventDefault();
+  var pk = $(this).attr('value');
+  const slug = $('#slug').first().data('slug');
+
+  $.ajax({
+    method: 'POST',
+    url: `/post/${slug}/like/`,
+    data: {'slug' : pk},
+    dataType: 'json',
+    success: function(response) {
+      $('.like-section').html(response['form']);
     },
     error: function(rs, e) {
       console.log(rs.responseText);

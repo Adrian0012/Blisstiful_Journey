@@ -24,12 +24,19 @@ class Post(models.Model):
   category = models.ForeignKey(Category, on_delete=models.DO_NOTHING)
   title = models.CharField(max_length=100)
   content = models.TextField()
+  likes = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='likes', blank=True)
   image = models.ImageField(default='default.jpg')
   date_posted = models.DateTimeField(default=timezone.now)
   slug = models.SlugField(null=True, unique=True, max_length=250)
 
+  class Meta:
+    ordering = ['-id']
+
   def __str__(self):
     return self.title
+
+  def total_likes(self):
+    return self.likes.count()
 
   def get_absolute_url(self):
       return reverse('blog-post-view', kwargs={'slug': self.slug})
