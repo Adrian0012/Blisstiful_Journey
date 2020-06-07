@@ -1,5 +1,3 @@
-{{ total_likes }} Like {{ total_likes|pluralize }}
-        
 {% if request.user.is_authenticated %}
 <form action="" method="POST">
    {% csrf_token%}
@@ -11,3 +9,4 @@
   {% endif %}
 </form>
 {% endif %}
+<span class="total-likes">{{ total_likes }} Like {{ total_likes|pluralize }}</span>

@@ -18,13 +18,21 @@
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
         <p>{{post.content}}</p>
-        
-        <a href="#">Share</a>
-        <button class="comment-btn">Comment</button>
-        {{ comments.count }} Comment{{ comments|pluralize }}
-
-        <div class="like-section">
-          {% include "blog/post_likes.html" %}
+        <hr>
+        <div class="card">
+          <div class="card-header">
+            <span>Author - Julia</span>
+            <div class="like-section post-cta-section">
+              {% include "blog/post_likes.html" %}
+            </div>
+          </div>
+          <div class="card-body">
+            <button class="comment-btn">Comment</button>
+            {{ comments.count }} Comment{{ comments|pluralize }}
+          </div>
+          <div class="card-footer text-muted">
+            Tags
+          </div>
         </div>
       </div>
     </div>

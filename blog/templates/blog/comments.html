@@ -19,7 +19,7 @@
           </div>
         </div>
       </div>
-      <hr>
+      <br>
       <div>
         {% for comment in comments %}
         <div class="card comment-card shadow-sm p-3 mb-5 bg-white rounded">
@@ -28,9 +28,9 @@
             <h5 class="card-title">{{comment.author}}</h5>
             <h6 class="card-subtitle mb-2 text-muted">{{comment.date_posted}}</h6>
             <p class="card-text">{{comment.content}}</p>
-            <a class="card-link"><button class="reply-button">Reply</button></a>
+            <a class="card-link"><span class="reply-button fas fa-reply">Reply</span></a>
             <hr>
-            <div class='reply-border'>
+            <div>
               {% for reply in comment.replies.all %}
               <section class="reply-section">
                 <h5 class="card-title ml-4 custom-h5">by- {{reply.author}}</h5>
