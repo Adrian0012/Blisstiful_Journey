@@ -38,9 +38,18 @@
   cursor: pointer;
 }
 
+.comment-btn {
+  cursor: pointer;
+}
+
 .post-cta-section {
   display: inline-flex;
-  margin-left: 280px ;
+  margin-left: 410px;
+}
+
+.total-likes {
+  margin-left: 10px;
+  padding-top: 1px;
 }
 
 /* navbar & side-menu */
