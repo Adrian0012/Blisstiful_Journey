@@ -3,12 +3,9 @@
     <div class="col-lg-8 col-md-10 mx-auto">
       <div class="container">
         <div class="row">
-          <div class="col-lg-8 col-md-10 mx-auto" id="comment-form" style="display: none;">
-            <form method="post" action="."> 
+          <div class="custom-comment-form" id="comment-form" style="display: none;">
+            <form method="post" action="." class="custom-form"> 
               {% csrf_token %}
-              <div class='col-md-4 offset-md-4'>
-                <h6>Leave your comment</h6>
-              </div>
               <br>
               <div class='col'>
                 {{form.content}}
@@ -43,7 +40,6 @@
                   {% csrf_token %}
                   <input type="hidden" name="comment_id" class='reply-comment-id' value="{{comment.id}}">
                   <div class='col-md-4 offset-md-4'>
-                    <h6>Reply</h6>
                   </div>
                   <br>
                   <div class='col'>

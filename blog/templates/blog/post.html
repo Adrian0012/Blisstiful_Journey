@@ -21,17 +21,17 @@
         <hr>
         <div class="card">
           <div class="card-header">
-            <span>Author - Julia</span>
+            <span>Author - {{post.author}}</span>
             <div class="like-section post-cta-section">
               {% include "blog/post_likes.html" %}
             </div>
           </div>
           <div class="card-body">
             <a class="card-link"><span class="comment-btn fas fa-comments">Comment</span></a>
-            {{ comments.count }} Comment{{ comments|pluralize }}
           </div>
           <div class="card-footer text-muted">
             Tags
+            <span class="comments-counter">{{ comments.count }} Comment{{ comments|pluralize }}</span>
           </div>
         </div>
       </div>

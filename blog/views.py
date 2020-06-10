@@ -116,7 +116,8 @@ def view_category(request, slug):
 
   context = {
     'category' : category,
-    'posts' : posts
+    'posts' : posts,
+    'categories' : Category.objects.all()
   }
 
   return render(request, 'blog/category_view.html', context)
