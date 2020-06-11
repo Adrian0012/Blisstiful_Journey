@@ -36,11 +36,10 @@
               </section>   
               {% endfor %}
               <div class="form-group row reply-form" style="display: none;">
-                <form method="post" action="."> 
+                <form method="post" action="." style="width: 100%;">
+                   <!--adjusted reply form width // adjust the height too  -->
                   {% csrf_token %}
                   <input type="hidden" name="comment_id" class='reply-comment-id' value="{{comment.id}}">
-                  <div class='col-md-4 offset-md-4'>
-                  </div>
                   <br>
                   <div class='col'>
                     {{form.content}}

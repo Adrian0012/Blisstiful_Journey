@@ -17,6 +17,7 @@ def index(request):
 
 #Contact page
 def contact(request):
+  
   if request.method == 'POST':
 
     contact_name = request.POST.get('contact-name') 
@@ -26,7 +27,7 @@ def contact(request):
     context = {
       'contact_name': contact_name,
       'contact_email': contact_email,
-      'contact_message': contact_message
+      'contact_message': contact_message,
     }
     send_mail(
       'Personal Message From: ' + contact_name, #subject
@@ -39,11 +40,11 @@ def contact(request):
     return render(request, 'blog/contact.html', context)
 
   else:
-    return render(request, 'blog/contact.html')
+    return render(request, 'blog/contact.html', {'categories' : Category.objects.all()})
 
 #About page
 def about(request):
-  return render(request, 'blog/about.html')
+  return render(request, 'blog/about.html', {'categories' : Category.objects.all()})
 
 #View/Comment/Reply Post
 @login_required
@@ -77,7 +78,8 @@ def view_post(request, slug):
     'comments' : comments,
     'form' : form,
     'is_liked' : is_liked,
-    'total_likes' : post.total_likes()
+    'total_likes' : post.total_likes(),
+    'categories' : Category.objects.all()
   }
 
   if request.is_ajax():
@@ -109,7 +111,6 @@ def post_like(request, slug):
     return JsonResponse({ 'form' : html })
     
 #Category Detail
-@login_required
 def view_category(request, slug):
   category = Category.objects.get(slug=slug)
   posts = Post.objects.filter(category=category)

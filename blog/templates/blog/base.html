@@ -37,53 +37,47 @@
 <div id="sidebarMenu">
   <ul class="sidebarMenuInner">
     <li><a href="/">LOGO</a></li>
-    <li><a href="/accounts/logout" class="sidebar-custom-font">Log Out<i class="fas fa-sign-out-alt sidebar-custom-icon"></i></a>
-    <li><a class='custom-dropdown-button sidebar-custom-font' data-toggle="collapse">Categories</a></li>
+    <li><a href="/accounts/logout" class="sidebar-custom-font"><i class="fas fa-sign-out-alt sidebar-custom-icon"></i>Log Out</a>
+    <li><a class='custom-dropdown-button sidebar-custom-font' data-toggle="collapse"><i class="fas fa-swatchbook sidebar-custom-icon"></i>Categories</a></li>
     <div id='collapse' style="display: none;">
       {% for category in categories %}
         <li>
-          <a href="/category-detail/{{category.slug}}" class="sidebar-custom-font sidebar-dropdown">{{category.name}}</a>
+          <a href="/category-detail/{{category.slug}}" class="sidebar-dropdown-custom-font sidebar-dropdown">{{category.name}}</a>
         </li>
       {% endfor %}
     </div>
-    <!-- <li><a href="#homeSubmenu" class="sidebar-custom-font dropdown-toggle" data-toggle="collapse" aria-expanded="false">Categories<i class="fas fa-swatchbook sidebar-custom-icon"></i></a></li>
-      <ul class="collapse list-unstyled" id="homeSubmenu">
-        {% for category in categories %}
-          <li>
-            <a href="/category-detail/{{category.slug}}" class="sidebar-custom-font sidebar-dropdown">{{category.name}}</a>
-          </li>
-          {% endfor %}
-      </ul> -->
-    <li><a href="/contact" class="sidebar-custom-font">Contact<i class="fas fa-envelope sidebar-custom-icon"></i></a></li>
-    <li><a href="/about" class="sidebar-custom-font">About<i class="fas fa-book-open sidebar-custom-icon"></i></a></li>
+    <li><a href="/contact" class="sidebar-custom-font"><i class="fas fa-envelope sidebar-custom-icon"></i>Contact</a></li>
+    <li><a href="/about" class="sidebar-custom-font"><i class="fas fa-book-open sidebar-custom-icon"></i>About</a></li>
   </ul>
 </div>
 
   {% else %}
 
-<div class="header"></div>
-<input type="checkbox" class="openSidebarMenu" id="openSidebarMenu">
-<label for="openSidebarMenu" class="sidebarIconToggle">
-<div class="spinner diagonal part-1"></div>
-<div class="spinner horizontal"></div>
-<div class="spinner diagonal part-2"></div>
-</label>
-<div id="sidebarMenu">
-  <ul class="sidebarMenuInner">
-    <li><a href="/">LOGO</a></li>
-    <li><a href="/accounts/login" class="sidebar-custom-font">Log In<i class="fas fa-sign-in-alt sidebar-custom-icon"></i></a></li>
-    <li><a href="#homeSubmenu" class="sidebar-custom-font dropdown-toggle" data-toggle="collapse" aria-expanded="false">Categories<i class="fas fa-swatchbook sidebar-custom-icon"></i></a></li>
-      <ul class="collapse list-unstyled" id="homeSubmenu">
+  <div class="header"></div>
+  <div  id="sidebarOverlay" style="display: none;"></div> 
+  <input type="checkbox" class="openSidebarMenu custom-dropdown-button" data-toggle="sidebarOverlay" id="openSidebarMenu">
+  <label for="openSidebarMenu" class="sidebarIconToggle">
+    <div class="spinner diagonal part-1"></div>
+    <div class="spinner horizontal"></div>
+    <div class="spinner diagonal part-2"></div>
+  </label>
+  <div id="sidebarMenu">
+    <ul class="sidebarMenuInner">
+      <li><a href="/">LOGO</a></li>
+      <li><a href="/accounts/logout" class="sidebar-custom-font"><i class="fas fa-sign-in-alt sidebar-custom-icon"></i>Log In | Register</a>
+      <li><a class='custom-dropdown-button sidebar-custom-font' data-toggle="collapse"><i class="fas fa-swatchbook sidebar-custom-icon"></i>Categories</a></li>
+      <div id='collapse' style="display: none;">
         {% for category in categories %}
           <li>
-            <a href="/category-detail/{{category.slug}}" class="sidebar-custom-font sidebar-dropdown">{{category.name}}</a>
+            <a href="/category-detail/{{category.slug}}" class="sidebar-dropdown-custom-font sidebar-dropdown">{{category.name}}</a>
           </li>
-          {% endfor %}
-      </ul>
-    <li><a href="/contact" class="sidebar-custom-font">Contact</a><i class="fas fa-envelope sidebar-custom-icon"></i></li>
-    <li><a href="/about" class="sidebar-custom-font">About</a><i class="fas fa-book-open sidebar-custom-icon"></i></li> 
-</div>
-                   
+        {% endfor %}
+      </div>
+      <li><a href="/contact" class="sidebar-custom-font"><i class="fas fa-envelope sidebar-custom-icon"></i>Contact</a></li>
+      <li><a href="/about" class="sidebar-custom-font"><i class="fas fa-book-open sidebar-custom-icon"></i>About</a></li>
+    </ul>
+  </div>
+                     
   {% endif %}
 
   <!-- Page Header -->

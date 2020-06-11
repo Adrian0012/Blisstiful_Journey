@@ -61,6 +61,10 @@
   width: 100%;
 }
 
+.custom-reply-form {
+  width: 100%;
+}
+
 /* navbar & side-menu */
 
 html, body {
@@ -245,6 +249,10 @@ input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-2 {
 
 .sidebar-custom-font {
   font-size: 15px;
+}
+
+.sidebar-dropdown-custom-font {
+  font-size: 13px;
 }
 
 .sidebar-custom-icon {
