@@ -65,6 +65,10 @@
   width: 100%;
 }
 
+.form-control-custom {
+  height: 150px !important; 
+}
+
 /* navbar & side-menu */
 
 html, body {

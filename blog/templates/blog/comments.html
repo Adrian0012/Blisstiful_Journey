@@ -36,8 +36,7 @@
               </section>   
               {% endfor %}
               <div class="form-group row reply-form" style="display: none;">
-                <form method="post" action="." style="width: 100%;">
-                   <!--adjusted reply form width // adjust the height too  -->
+                <form method="post" action="." class="custom-reply-form">
                   {% csrf_token %}
                   <input type="hidden" name="comment_id" class='reply-comment-id' value="{{comment.id}}">
                   <br>
