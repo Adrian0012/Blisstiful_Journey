@@ -14,17 +14,24 @@ class CategoryAdmin(admin.ModelAdmin):
 
 class PostAdmin(admin.ModelAdmin):
   date_hierarchy = 'date_posted'
-  list_display = ('title', 'author', 'date_posted')
+  list_display = ('title', 'author', 'date_posted', 'tag_list')
   list_filter = ('date_posted','author')
   search_fields = ('title', 'content')
   prepopulated_fields = {"slug": ("title",)}
   #excluding datetime field from form
   exclude = ('date_posted',)
 
+  def get_queryset(self, request):
+    return super().get_queryset(request).prefetch_related('tags')
+
+  def tag_list(self, obj):
+    return u", ".join(o.name for o in obj.tags.all())
+
   fieldsets = [
     (None, {'fields' : ['author']}),
     ('Select a Category', {'fields' : ['category']}),
     ('Write your post', {'fields' : ['title', 'content']}),
+    ('Tags', {'fields' : ['tags']}),
     ('Upload Image', {'fields' : ['image']}),
     ('Slug', {'fields' : ['slug']}),
   ]

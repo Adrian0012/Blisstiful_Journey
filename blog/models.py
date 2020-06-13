@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.utils import timezone
 from django.conf import settings
-
+from taggit.managers import TaggableManager
 
 class User(AbstractUser):
   pass
@@ -28,6 +28,7 @@ class Post(models.Model):
   image = models.ImageField(default='default.jpg')
   date_posted = models.DateTimeField(default=timezone.now)
   slug = models.SlugField(null=True, unique=True, max_length=250)
+  tags = TaggableManager()
 
   class Meta:
     ordering = ['-id']

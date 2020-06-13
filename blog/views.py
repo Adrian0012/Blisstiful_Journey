@@ -51,6 +51,7 @@ def about(request):
 def view_post(request, slug):
   post = Post.objects.get(slug=slug)
   comments = post.comments.filter(post=post, reply=None).order_by('-date_posted')
+  common_tags = Post.tags
 
   is_liked = False
   if post.likes.filter(id=request.user.id).exists():
@@ -69,7 +70,8 @@ def view_post(request, slug):
       comment.author = request.user
       comment.post = post
       comment.reply = data
-      comment.save()    
+      comment.save()
+      form.save_m2m()    
   else:
       form = CommentForm()
 
@@ -79,7 +81,8 @@ def view_post(request, slug):
     'form' : form,
     'is_liked' : is_liked,
     'total_likes' : post.total_likes(),
-    'categories' : Category.objects.all()
+    'categories' : Category.objects.all(),
+    'common_tags' : common_tags
   }
 
   if request.is_ajax():
