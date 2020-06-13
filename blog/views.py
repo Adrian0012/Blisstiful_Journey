@@ -10,7 +10,7 @@ from django.http import JsonResponse
 #Index page
 def index(request):
   data = {
-    'posts' : Post.objects.all(),
+    'posts' : Post.objects.all()[:5],
     'categories' : Category.objects.all()
   }
   return render(request, 'blog/index.html', data)
@@ -113,7 +113,7 @@ def post_like(request, slug):
 #Category Detail
 def view_category(request, slug):
   category = Category.objects.get(slug=slug)
-  posts = Post.objects.filter(category=category)
+  posts = Post.objects.filter(category=category).order_by('-date_posted')
 
   context = {
     'category' : category,
