@@ -3,12 +3,9 @@
     <div class="col-lg-8 col-md-10 mx-auto">
       <div class="container">
         <div class="row">
-          <div class="col-lg-8 col-md-10 mx-auto" id="comment-form" style="display: none;">
-            <form method="post" action="."> 
+          <div class="custom-comment-form" id="comment-form" style="display: none;">
+            <form method="post" action="." class="custom-form"> 
               {% csrf_token %}
-              <div class='col-md-4 offset-md-4'>
-                <h6>Leave your comment</h6>
-              </div>
               <br>
               <div class='col'>
                 {{form.content}}
@@ -19,7 +16,7 @@
           </div>
         </div>
       </div>
-      <hr>
+      <br>
       <div>
         {% for comment in comments %}
         <div class="card comment-card shadow-sm p-3 mb-5 bg-white rounded">
@@ -28,9 +25,9 @@
             <h5 class="card-title">{{comment.author}}</h5>
             <h6 class="card-subtitle mb-2 text-muted">{{comment.date_posted}}</h6>
             <p class="card-text">{{comment.content}}</p>
-            <a class="card-link"><button class="reply-button">Reply</button></a>
+            <a class="card-link"><span class="reply-button fas fa-reply">Reply</span></a>
             <hr>
-            <div class='reply-border'>
+            <div>
               {% for reply in comment.replies.all %}
               <section class="reply-section">
                 <h5 class="card-title ml-4 custom-h5">by- {{reply.author}}</h5>
@@ -39,12 +36,9 @@
               </section>   
               {% endfor %}
               <div class="form-group row reply-form" style="display: none;">
-                <form method="post" action="."> 
+                <form method="post" action="." class="custom-reply-form">
                   {% csrf_token %}
                   <input type="hidden" name="comment_id" class='reply-comment-id' value="{{comment.id}}">
-                  <div class='col-md-4 offset-md-4'>
-                    <h6>Reply</h6>
-                  </div>
                   <br>
                   <div class='col'>
                     {{form.content}}
@@ -58,7 +52,6 @@
         </div>
       {% endfor %}
     </div>
-
     </div>
   </div>
 </div>

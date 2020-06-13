@@ -29,16 +29,47 @@
   background-color:rgba(197, 215, 223, 0.2);
 }
 
-.reply-border {
-  border: solid 1px lightgray;
-}
-
 #index-img {
   background-image: url('/static/images/img2.jpg');
   background-position: center;
 }
 
-/* navbar */
+.reply-button {
+  cursor: pointer;
+}
+
+.comment-btn {
+  cursor: pointer;
+  padding-left: 30px;
+}
+
+.post-cta-section {
+  display: inline-flex;
+  margin-left: 410px;
+}
+
+.total-likes {
+  margin-left: 10px;
+  padding-top: 1px;
+}
+
+.comments-counter {
+  float: right;
+}
+
+.custom-comment-form {
+  width: 100%;
+}
+
+.custom-reply-form {
+  width: 100%;
+}
+
+.form-control-custom {
+  height: 150px !important; 
+}
+
+/* navbar & side-menu */
 
 html, body {
   overflow-x: hidden;
@@ -57,7 +88,6 @@ body {
   width: 100%;
   max-width: 100%;
   box-shadow: none;
-  /* background-color: #FC466B; */
   position: fixed;
   height: 60px!important;
   overflow: hidden;
@@ -87,15 +117,26 @@ body {
 }
 
 #sidebarMenu {
-  height: 100%;
   position: fixed;
   z-index: 10;
   left: 0;
-  width: 250px;
+  width: 100%;
+  height:100vh;
+  overflow: scroll;
   margin-top: 60px;
-  transform: translateX(-250px);
+  transform: translateX(-100%);
   transition: transform 250ms ease-in-out;
-  background: linear-gradient(180deg, #FC466B 0%, #3F5EFB 100%);
+}
+
+#sidebarOverlay {
+  position: fixed;
+  z-index: 5;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: .9;
+  background: #000;
 }
 
 .sidebarMenuInner {
@@ -106,7 +147,7 @@ body {
 
 .sidebarMenuInner li {
   list-style: none;
-  color: #fff;
+  color: #d5e3e0;
   text-transform: uppercase;
   font-weight: bold;
   padding: 20px;
@@ -121,7 +162,7 @@ body {
 }
 
 .sidebarMenuInner li a {
-  color: #fff;
+  color: rgba(47, 188, 208, 100);
   text-transform: uppercase;
   font-weight: bold;
   cursor: pointer;
@@ -156,7 +197,7 @@ input[type=checkbox] {
   position: absolute;
   height: 3px;
   width: 100%;
-  background-color: #fff;
+  background-color: rgba(47, 188, 208, 100);
 }
 
 .horizontal {
@@ -200,4 +241,22 @@ input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-2 {
   box-sizing: border-box;
   transform: rotate(-135deg);
   margin-top: -9px;
+}
+
+.sidebar-custom-font {
+  font-size: 15px;
+}
+
+.sidebar-dropdown-custom-font {
+  font-size: 13px;
+}
+
+.sidebar-custom-icon {
+  margin: 5px;
+  color: rgba(252, 70, 107, 100);
+}
+
+.sidebar-dropdown {
+  padding-left: 25px;
+  display: list-item;
 }

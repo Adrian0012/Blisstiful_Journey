@@ -7,6 +7,7 @@ $(document).ready(function() {
     }
 });
 
+// Comments and Replies handler
 assingHandlers = () => {
   $('.reply-button').click(e => {
     $(e.target).parents('.card-body').find('.reply-form').toggle()
@@ -19,6 +20,7 @@ assingHandlers = () => {
 
 assingHandlers();
 
+// Comments
 $(document).on('submit', '#comment-form', function(event){
   event.preventDefault();
   const slug = $('#slug').first().data('slug');
@@ -43,6 +45,7 @@ $(document).on('submit', '#comment-form', function(event){
   })
 })
 
+// Replies
 $(document).on('submit', '.reply-form', function(event){
   const slug = $('#slug').first().data('slug');
 
@@ -70,6 +73,7 @@ $(document).on('submit', '.reply-form', function(event){
   event.preventDefault();
 })
 
+// Likes
 $(document).on('click', '#like', function(event){
   event.preventDefault();
   var pk = $(this).attr('value');
