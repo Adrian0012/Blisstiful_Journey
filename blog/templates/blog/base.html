@@ -56,6 +56,7 @@
   <div class="header"></div>
   <div  id="sidebarOverlay" style="display: none;"></div> 
   <input type="checkbox" class="openSidebarMenu custom-dropdown-button" data-toggle="sidebarOverlay" id="openSidebarMenu">
+  <input type="checkbox" class="openSidebarMenu login-dropdown-button" data-toggle="sidebarOverlay" id="openSidebarMenu">
   <label for="openSidebarMenu" class="sidebarIconToggle">
     <div class="spinner diagonal part-1"></div>
     <div class="spinner horizontal"></div>
@@ -64,7 +65,19 @@
   <div id="sidebarMenu">
     <ul class="sidebarMenuInner">
       <li><a href="/">LOGO</a></li>
-      <li><a href="/accounts/logout" class="sidebar-custom-font"><i class="fas fa-sign-in-alt sidebar-custom-icon"></i>Log In | Register</a>
+      <!-- <li><a href="/accounts/login" class="sidebar-custom-font"><i class="fas fa-sign-in-alt sidebar-custom-icon"></i>Log In | Register</a> -->
+      <li><a class='login-dropdown-button sidebar-custom-font' data-toggle="collapse"><i class="fas fa-swatchbook sidebar-custom-icon"></i>Log In | Register</a></li>
+      <div id='collapse' style="display: none;">
+          <li>
+            <a href="#" class="sidebar-dropdown-custom-font sidebar-dropdown">Facebook</a>
+          </li>
+          <li>
+            <a href="#" class="sidebar-dropdown-custom-font sidebar-dropdown">Google</a>
+          </li>
+          <li>
+            <a href="#" class="sidebar-dropdown-custom-font sidebar-dropdown">Instagram</a>
+          </li>
+      </div>
       <li><a class='custom-dropdown-button sidebar-custom-font' data-toggle="collapse"><i class="fas fa-swatchbook sidebar-custom-icon"></i>Categories</a></li>
       <div id='collapse' style="display: none;">
         {% for category in categories %}
