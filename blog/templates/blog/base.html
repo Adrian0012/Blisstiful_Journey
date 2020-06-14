@@ -26,31 +26,39 @@
   
   <!-- Navigation -->
   {% if user.is_authenticated %}
-<div class="header"></div>
-<div  id="sidebarOverlay" style="display: none;"></div> 
-<input type="checkbox" class="openSidebarMenu custom-dropdown-button" data-toggle="sidebarOverlay" id="openSidebarMenu">
-<label for="openSidebarMenu" class="sidebarIconToggle">
-  <div class="spinner diagonal part-1"></div>
-  <div class="spinner horizontal"></div>
-  <div class="spinner diagonal part-2"></div>
-</label>
-<div id="sidebarMenu">
-  <ul class="sidebarMenuInner">
-    <li><a href="/">LOGO</a></li>
-    <li><a href="/accounts/logout" class="sidebar-custom-font"><i class="fas fa-sign-out-alt sidebar-custom-icon"></i>Log Out</a>
-    <li><a class='custom-dropdown-button sidebar-custom-font' data-toggle="collapse"><i class="fas fa-swatchbook sidebar-custom-icon"></i>Categories</a></li>
-    <div id='collapse' style="display: none;">
-      {% for category in categories %}
-        <li>
-          <a href="/category-detail/{{category.slug}}" class="sidebar-dropdown-custom-font sidebar-dropdown">{{category.name}}</a>
-        </li>
-      {% endfor %}
-    </div>
-    <li><a href="/contact" class="sidebar-custom-font"><i class="fas fa-envelope sidebar-custom-icon"></i>Contact</a></li>
-    <li><a href="/about" class="sidebar-custom-font"><i class="fas fa-book-open sidebar-custom-icon"></i>About</a></li>
-  </ul>
-</div>
-
+  <div class="header"></div>
+  <div  id="sidebarOverlay" style="display: none;"></div> 
+  <input type="checkbox" class="openSidebarMenu custom-dropdown-button" data-toggle="sidebarOverlay" id="openSidebarMenu">
+  <input type="checkbox" class="openSidebarMenu login-dropdown-button" data-toggle="sidebarOverlay" id="openSidebarMenu">
+  <label for="openSidebarMenu" class="sidebarIconToggle">
+    <div class="spinner diagonal part-1"></div>
+    <div class="spinner horizontal"></div>
+    <div class="spinner diagonal part-2"></div>
+  </label>
+  <div id="sidebarMenu">
+    <ul class="sidebarMenuInner">
+      <li><a href="/">LOGO</a></li>
+      <li><a href="/accounts/logout" class="sidebar-custom-font"><i class="fas fa-sign-out-alt sidebar-custom-icon"></i>Log Out</a>
+      <li><a class='custom-dropdown-button sidebar-custom-font' data-toggle="category-collapse"><i class="fas fa-swatchbook sidebar-custom-icon"></i>Categories</a></li>
+      <div id='category-collapse' style="display: none;">
+        {% for category in categories %}
+          <li>
+            <a href="/category-detail/{{category.slug}}" class="sidebar-dropdown-custom-font sidebar-dropdown"><i class="fas fa-swatchbook sidebar-custom-icon"></i>{{category.name}}</a>
+          </li>
+        {% endfor %}
+      </div>
+      <li><a class='custom-dropdown-button sidebar-custom-font' data-toggle="tag-collapse"><i class="fas fa-hashtag sidebar-custom-icon"></i>Tags</a></li>
+      <div id='tag-collapse' style="display: none;">
+        {% for mt in common_tags %}
+          <li>
+            <a href="#" class="sidebar-dropdown-custom-font sidebar-dropdown"><i class="fas fa-hashtag sidebar-custom-icon"></i>{{mt}}</a>
+          </li>
+        {% endfor %}
+      </div>
+      <li><a href="/contact" class="sidebar-custom-font"><i class="fas fa-envelope sidebar-custom-icon"></i>Contact</a></li>
+      <li><a href="/about" class="sidebar-custom-font"><i class="fas fa-book-open sidebar-custom-icon"></i>About</a></li>
+    </ul>
+  </div>
   {% else %}
 
   <div class="header"></div>
@@ -65,7 +73,7 @@
   <div id="sidebarMenu">
     <ul class="sidebarMenuInner">
       <li><a href="/">LOGO</a></li>
-      <li><a class='custom-dropdown-button sidebar-custom-font' data-toggle="login-collapse"><i class="fas fa-swatchbook sidebar-custom-icon"></i>Log In | Register</a></li>
+      <li><a class='custom-dropdown-button sidebar-custom-font' data-toggle="login-collapse"><i class="fas fa-sign-in-alt sidebar-custom-icon"></i>Log In | Register</a></li>
       <div id='login-collapse' style="display: none;">
           <li>
             <a href="#" class="sidebar-dropdown-custom-font sidebar-dropdown"><i class="fab fa-facebook-square sidebar-custom-icon"></i>Facebook</a>
@@ -81,11 +89,18 @@
       <div id='category-collapse' style="display: none;">
         {% for category in categories %}
           <li>
-            <a href="/category-detail/{{category.slug}}" class="sidebar-dropdown-custom-font sidebar-dropdown">{{category.name}}</a>
+            <a href="/category-detail/{{category.slug}}" class="sidebar-dropdown-custom-font sidebar-dropdown"><i class="fas fa-swatchbook sidebar-custom-icon"></i>{{category.name}}</a>
           </li>
         {% endfor %}
       </div>
-      <li><a href="/accounts/logout" class="sidebar-custom-font"><i class="fas fa-hashtag sidebar-custom-icon"></i>Tags</a>
+      <li><a class='custom-dropdown-button sidebar-custom-font' data-toggle="tag-collapse"><i class="fas fa-hashtag sidebar-custom-icon"></i>Tags</a></li>
+      <div id='tag-collapse' style="display: none;">
+        {% for mt in common_tags %}
+          <li>
+            <a href="#" class="sidebar-dropdown-custom-font sidebar-dropdown"><i class="fas fa-hashtag sidebar-custom-icon"></i>{{mt}}</a>
+          </li>
+        {% endfor %}
+      </div>
       <li><a href="/contact" class="sidebar-custom-font"><i class="fas fa-envelope sidebar-custom-icon"></i>Contact</a></li>
       <li><a href="/about" class="sidebar-custom-font"><i class="fas fa-book-open sidebar-custom-icon"></i>About</a></li>
     </ul>

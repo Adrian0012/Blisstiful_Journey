@@ -11,7 +11,9 @@ from django.http import JsonResponse
 def index(request):
   data = {
     'posts' : Post.objects.all()[:5],
-    'categories' : Category.objects.all()
+    'categories' : Category.objects.all(),
+    'common_tags' : Post.tags.most_common(),
+
   }
   return render(request, 'blog/index.html', data)
 
@@ -40,18 +42,28 @@ def contact(request):
     return render(request, 'blog/contact.html', context)
 
   else:
-    return render(request, 'blog/contact.html', {'categories' : Category.objects.all()})
+    context = {
+    'categories' : Category.objects.all(),
+    'common_tags' : Post.tags.most_common(),
+    }
+
+    return render(request, 'blog/contact.html', context)
 
 #About page
 def about(request):
-  return render(request, 'blog/about.html', {'categories' : Category.objects.all()})
+  context = {
+    'categories' : Category.objects.all(),
+    'common_tags' : Post.tags.most_common(),
+  }
+
+  return render(request, 'blog/about.html', context)
 
 #View/Comment/Reply Post
 @login_required
 def view_post(request, slug):
   post = Post.objects.get(slug=slug)
   comments = post.comments.filter(post=post, reply=None).order_by('-date_posted')
-  common_tags = Post.tags
+  common_tags = Post.tags.most_common()
 
   is_liked = False
   if post.likes.filter(id=request.user.id).exists():
@@ -121,7 +133,8 @@ def view_category(request, slug):
   context = {
     'category' : category,
     'posts' : posts,
-    'categories' : Category.objects.all()
+    'categories' : Category.objects.all(),
+    'common_tags' : Post.tags.most_common(),
   }
 
   return render(request, 'blog/category_view.html', context)
