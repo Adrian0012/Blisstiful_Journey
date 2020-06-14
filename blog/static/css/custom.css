@@ -69,6 +69,10 @@
   height: 150px !important; 
 }
 
+.index-subheader {
+  color: rgba(47, 188, 208, 100);;
+}
+
 /* navbar & side-menu */
 
 html, body {
