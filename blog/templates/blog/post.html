@@ -30,9 +30,8 @@
             <a class="card-link"><span class="comment-btn fas fa-comments">Comment</span></a>
           </div>
           <div class="card-footer text-muted">
-            <!-- <i class="fas fa-tag"></i>//<i class="fas fa-hashtag"></i> -->
             {% for tag in post.tags.all %}
-              <i class="fas fa-hashtag">{{ tag }}</i>
+              <i class="fas fa-hashtag custom-tags-font">{{ tag }}</i>
             {% endfor %}
             <span class="comments-counter">{{ comments.count }} Comment{{ comments|pluralize }}</span>
           </div>

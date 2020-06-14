@@ -4,10 +4,10 @@
 {% load socialaccount %}
 
 {% block image %} 
-<header class="masthead" style="background-image: url({{post.image.url}})">
+<header class="masthead" style="background-image: url('/static/images/index.jpg')">
 {% endblock image %}
 
-{% block heading%} <h1>{{tag.name}}</h1> {% endblock heading%}
+{% block heading%} <h1>#{{tag.name}}</h1> {% endblock heading%}
 
 {% block content %}
 

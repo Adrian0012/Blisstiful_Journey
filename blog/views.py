@@ -124,7 +124,8 @@ def tagged(request, slug):
 
   context = {
     'tag' : tag,
-    'posts' : posts
+    'posts' : posts,
+    'categories' : Category.objects.all(),
   }
 
   return render(request, 'blog/tag_view.html', context)
