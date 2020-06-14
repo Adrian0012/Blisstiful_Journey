@@ -30,7 +30,7 @@
 }
 
 #index-img {
-  background-image: url('/static/images/img2.jpg');
+  background-image: url('/static/images/index.jpg');
   background-position: center;
 }
 
@@ -71,6 +71,10 @@
 
 .index-subheader {
   color: rgba(47, 188, 208, 100);;
+}
+
+.custom-tags-font {
+  font-size: 15px;
 }
 
 /* navbar & side-menu */

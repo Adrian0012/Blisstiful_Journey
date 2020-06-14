@@ -1,5 +1,6 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Post, Comment, Category
+from taggit.models import Tag
 from .forms import CommentForm
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
@@ -103,6 +104,32 @@ def view_post(request, slug):
   else:  
     return render(request, 'blog/post.html', context)
 
+#Category Detail
+def view_category(request, slug):
+  category = Category.objects.get(slug=slug)
+  posts = Post.objects.filter(category=category).order_by('-date_posted')
+
+  context = {
+    'category' : category,
+    'posts' : posts,
+    'categories' : Category.objects.all(),
+    'common_tags' : Post.tags.most_common(),
+  }
+
+  return render(request, 'blog/category_view.html', context)
+
+def tagged(request, slug):
+  tag = Tag.objects.get(slug=slug)
+  posts = Post.objects.filter(tags=tag)
+
+  context = {
+    'tag' : tag,
+    'posts' : posts,
+    'categories' : Category.objects.all(),
+  }
+
+  return render(request, 'blog/tag_view.html', context)
+  
 #Post Likes
 @login_required
 def post_like(request, slug):
@@ -125,19 +152,6 @@ def post_like(request, slug):
     html = render_to_string('blog/post_likes.html', context, request=request)
     return JsonResponse({ 'form' : html })
     
-#Category Detail
-def view_category(request, slug):
-  category = Category.objects.get(slug=slug)
-  posts = Post.objects.filter(category=category).order_by('-date_posted')
-
-  context = {
-    'category' : category,
-    'posts' : posts,
-    'categories' : Category.objects.all(),
-    'common_tags' : Post.tags.most_common(),
-  }
-
-  return render(request, 'blog/category_view.html', context)
 
 #Update comments for posts
 def update_comment(request):

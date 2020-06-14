@@ -52,7 +52,7 @@
       <div id='tag-collapse' style="display: none;">
         {% for mt in common_tags %}
           <li>
-            <a href="#" class="sidebar-dropdown-custom-font sidebar-dropdown"><i class="fas fa-hashtag sidebar-custom-icon"></i>{{mt}}</a>
+            <a href="/tags/{{mt.slug}}" class="sidebar-dropdown-custom-font sidebar-dropdown"><i class="fas fa-hashtag sidebar-custom-icon"></i>{{mt}}</a>
           </li>
         {% endfor %}
       </div>
@@ -78,9 +78,6 @@
       <li><a href="/">LOGO</a></li>
       <li><a class='custom-dropdown-button sidebar-custom-font' data-toggle="login-collapse"><i class="fas fa-sign-in-alt sidebar-custom-icon"></i>Log In | Register</a></li>
       <div id='login-collapse' style="display: none;">
-        <!-- <li>
-          <a href="{% provider_login_url "facebook" method="oauth2" %}">Facebook OAuth2</a>
-        </li> -->
           <li>
             <a href="{% provider_login_url "facebook" method="oauth2" %}" class="sidebar-dropdown-custom-font sidebar-dropdown"><i class="fab fa-facebook-square sidebar-custom-icon"></i>Facebook</a>
           </li>
@@ -103,7 +100,7 @@
       <div id='tag-collapse' style="display: none;">
         {% for mt in common_tags %}
           <li>
-            <a href="#" class="sidebar-dropdown-custom-font sidebar-dropdown"><i class="fas fa-hashtag sidebar-custom-icon"></i>{{mt}}</a>
+            <a href="/tags/{{mt.slug}}" class="sidebar-dropdown-custom-font sidebar-dropdown"><i class="fas fa-hashtag sidebar-custom-icon"></i>{{mt}}</a>
           </li>
         {% endfor %}
       </div>
