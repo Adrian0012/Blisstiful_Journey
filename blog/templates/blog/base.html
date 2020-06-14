@@ -1,4 +1,5 @@
 {% load static %}
+{% load socialaccount %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -24,7 +25,7 @@
   </head> 
 <body>
   
-  <!-- Navigation -->
+  <!-- Navigation Logged IN-->
   {% if user.is_authenticated %}
   <div class="header"></div>
   <div  id="sidebarOverlay" style="display: none;"></div> 
@@ -59,8 +60,10 @@
       <li><a href="/about" class="sidebar-custom-font"><i class="fas fa-book-open sidebar-custom-icon"></i>About</a></li>
     </ul>
   </div>
+
   {% else %}
 
+  <!-- Navigation | Logged OUT -->
   <div class="header"></div>
   <div  id="sidebarOverlay" style="display: none;"></div> 
   <input type="checkbox" class="openSidebarMenu custom-dropdown-button" data-toggle="sidebarOverlay" id="openSidebarMenu">
@@ -75,15 +78,18 @@
       <li><a href="/">LOGO</a></li>
       <li><a class='custom-dropdown-button sidebar-custom-font' data-toggle="login-collapse"><i class="fas fa-sign-in-alt sidebar-custom-icon"></i>Log In | Register</a></li>
       <div id='login-collapse' style="display: none;">
+        <!-- <li>
+          <a href="{% provider_login_url "facebook" method="oauth2" %}">Facebook OAuth2</a>
+        </li> -->
           <li>
-            <a href="#" class="sidebar-dropdown-custom-font sidebar-dropdown"><i class="fab fa-facebook-square sidebar-custom-icon"></i>Facebook</a>
+            <a href="{% provider_login_url "facebook" method="oauth2" %}" class="sidebar-dropdown-custom-font sidebar-dropdown"><i class="fab fa-facebook-square sidebar-custom-icon"></i>Facebook</a>
           </li>
           <li>
-            <a href="#" class="sidebar-dropdown-custom-font sidebar-dropdown"><i class="fab fa-google sidebar-custom-icon"></i>Google</a>
+            <a href="{% provider_login_url 'google' %}" class="sidebar-dropdown-custom-font sidebar-dropdown"><i class="fab fa-google sidebar-custom-icon"></i>Google</a>
           </li>
-          <li>
+          <!-- <li>
             <a href="#" class="sidebar-dropdown-custom-font sidebar-dropdown"><i class="fab fa-twitter-square sidebar-custom-icon"></i>Instagram</a>
-          </li>
+          </li> -->
       </div>
       <li><a class='custom-dropdown-button sidebar-custom-font' data-toggle="category-collapse"><i class="fas fa-swatchbook sidebar-custom-icon"></i>Categories</a></li>
       <div id='category-collapse' style="display: none;">
