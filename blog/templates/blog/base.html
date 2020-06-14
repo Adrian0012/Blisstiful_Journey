@@ -65,21 +65,20 @@
   <div id="sidebarMenu">
     <ul class="sidebarMenuInner">
       <li><a href="/">LOGO</a></li>
-      <!-- <li><a href="/accounts/login" class="sidebar-custom-font"><i class="fas fa-sign-in-alt sidebar-custom-icon"></i>Log In | Register</a> -->
-      <li><a class='login-dropdown-button sidebar-custom-font' data-toggle="collapse"><i class="fas fa-swatchbook sidebar-custom-icon"></i>Log In | Register</a></li>
-      <div id='collapse' style="display: none;">
+      <li><a class='custom-dropdown-button sidebar-custom-font' data-toggle="login-collapse"><i class="fas fa-swatchbook sidebar-custom-icon"></i>Log In | Register</a></li>
+      <div id='login-collapse' style="display: none;">
           <li>
-            <a href="#" class="sidebar-dropdown-custom-font sidebar-dropdown">Facebook</a>
+            <a href="#" class="sidebar-dropdown-custom-font sidebar-dropdown"><i class="fab fa-facebook-square sidebar-custom-icon"></i>Facebook</a>
           </li>
           <li>
-            <a href="#" class="sidebar-dropdown-custom-font sidebar-dropdown">Google</a>
+            <a href="#" class="sidebar-dropdown-custom-font sidebar-dropdown"><i class="fab fa-google sidebar-custom-icon"></i>Google</a>
           </li>
           <li>
-            <a href="#" class="sidebar-dropdown-custom-font sidebar-dropdown">Instagram</a>
+            <a href="#" class="sidebar-dropdown-custom-font sidebar-dropdown"><i class="fab fa-twitter-square sidebar-custom-icon"></i>Instagram</a>
           </li>
       </div>
-      <li><a class='custom-dropdown-button sidebar-custom-font' data-toggle="collapse"><i class="fas fa-swatchbook sidebar-custom-icon"></i>Categories</a></li>
-      <div id='collapse' style="display: none;">
+      <li><a class='custom-dropdown-button sidebar-custom-font' data-toggle="category-collapse"><i class="fas fa-swatchbook sidebar-custom-icon"></i>Categories</a></li>
+      <div id='category-collapse' style="display: none;">
         {% for category in categories %}
           <li>
             <a href="/category-detail/{{category.slug}}" class="sidebar-dropdown-custom-font sidebar-dropdown">{{category.name}}</a>
