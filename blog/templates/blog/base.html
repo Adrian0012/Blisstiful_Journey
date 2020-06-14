@@ -52,7 +52,7 @@
       <div id='tag-collapse' style="display: none;">
         {% for mt in common_tags %}
           <li>
-            <a href="#" class="sidebar-dropdown-custom-font sidebar-dropdown"><i class="fas fa-hashtag sidebar-custom-icon"></i>{{mt}}</a>
+            <a href="/tags/{{mt.slug}}" class="sidebar-dropdown-custom-font sidebar-dropdown"><i class="fas fa-hashtag sidebar-custom-icon"></i>{{mt}}</a>
           </li>
         {% endfor %}
       </div>

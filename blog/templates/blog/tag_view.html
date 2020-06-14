@@ -1,13 +1,13 @@
 {% extends "blog/base.html" %}
 {% load static %}
-{% block title %} Category {% endblock title %}
+{% block title %} Tags {% endblock title %}
 {% load socialaccount %}
 
 {% block image %} 
 <header class="masthead" style="background-image: url({{post.image.url}})">
 {% endblock image %}
 
-{% block heading%} <h1>{{category.name}}</h1> {% endblock heading%}
+{% block heading%} <h1>{{tag.name}}</h1> {% endblock heading%}
 
 {% block content %}
 
