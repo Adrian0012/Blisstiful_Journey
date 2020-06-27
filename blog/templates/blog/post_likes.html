@@ -3,9 +3,9 @@
    {% csrf_token%}
 
    {% if is_liked %}
-  <i id="like" type="submit" name="post_id" value="{{post.id}}" class="fas fa-thumbs-down"></i>
+  <i id="like" type="submit" name="post_id" value="{{post.id}}" class="fas fa-thumbs-down custom-like-btn"></i>
   {% else %}
-  <i id="like" type="submit" name="post_id" value="{{post.id}}" class="fas fa-thumbs-up"></i>
+  <i id="like" type="submit" name="post_id" value="{{post.id}}" class="fas fa-thumbs-up custom-like-btn"></i>
   {% endif %}
 </form>
 {% endif %}

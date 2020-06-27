@@ -9,6 +9,6 @@ class CommentForm(forms.ModelForm):
     widgets = {
           'content': forms.Textarea(attrs={
             'class': 'form-control',
-            'style' : 'resize: none;'
+            'style' : 'resize: none; height: 200px;'
           })
         }
