@@ -10,7 +10,7 @@
               <div class='col'>
                 {{form.content}}
                 <br>
-                <button type="submit" class='comment-form-btn btn btn-primary'>Submit</button>
+                <button type="submit" class="comment-form-btn color">Submit</button>
               </div>
             </form>
           </div>
@@ -25,7 +25,11 @@
             <h5 class="card-title">{{comment.author}}</h5>
             <h6 class="card-subtitle mb-2 text-muted">{{comment.date_posted}}</h6>
             <p class="card-text">{{comment.content}}</p>
-            <a class="card-link"><span class="reply-button fas fa-reply">Reply</span></a>
+            {% if user.is_authenticated %}
+            <a class="card-link"><span class="reply-button fas fa-reply custom-reply-btn">Reply</span></a>
+            {% else %}
+            <a href="/accounts/login/"><span class="fas fa-sign-in-alt not-logged-a">You must sign in to leave a reply</span></a>
+            {% endif %}
             <hr>
             <div>
               {% for reply in comment.replies.all %}
@@ -43,7 +47,7 @@
                   <div class='col'>
                     {{form.content}}
                     <br>
-                    <button type="submit" class='comment-form-btn btn btn-primary'>Submit</button>
+                    <button type="submit" class='comment-form-btn color'>Submit</button>
                   </div>
                 </form>
               </div>

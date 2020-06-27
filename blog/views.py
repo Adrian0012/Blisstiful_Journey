@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.http import HttpResponseRedirect
 from .models import Post, Comment, Category
 from taggit.models import Tag
 from .forms import CommentForm
@@ -60,7 +61,6 @@ def about(request):
   return render(request, 'blog/about.html', context)
 
 #View/Comment/Reply Post
-@login_required
 def view_post(request, slug):
   post = Post.objects.get(slug=slug)
   comments = post.comments.filter(post=post, reply=None).order_by('-date_posted')

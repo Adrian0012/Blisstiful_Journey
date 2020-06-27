@@ -1,4 +1,5 @@
 {% load static %}
+{% load staticfiles %}
 {% load socialaccount %}
 
 <!DOCTYPE html>
@@ -38,7 +39,7 @@
   </label>
   <div id="sidebarMenu">
     <ul class="sidebarMenuInner">
-      <li><a href="/">LOGO</a></li>
+      <li><a href="/"><img src="{% static 'images/blisstiful-journey-logo.png'%}" style="width: 60px; height: 80px" alt="Blisstiful-Journey-Logo"></a></li>
       <li><a href="/accounts/logout" class="sidebar-custom-font"><i class="fas fa-sign-out-alt sidebar-custom-icon"></i>Log Out</a>
       <li><a class='custom-dropdown-button sidebar-custom-font' data-toggle="category-collapse"><i class="fas fa-swatchbook sidebar-custom-icon"></i>Categories</a></li>
       <div id='category-collapse' style="display: none;">
@@ -75,7 +76,7 @@
   </label>
   <div id="sidebarMenu">
     <ul class="sidebarMenuInner">
-      <li><a href="/">LOGO</a></li>
+      <li><a href="/"><img src="{% static 'images/blisstiful-journey-logo.png'%}" style="width: 60px; height: 80px" alt="Blisstiful-Journey-Logo"></a></li>
       <li><a class='custom-dropdown-button sidebar-custom-font' data-toggle="login-collapse"><i class="fas fa-sign-in-alt sidebar-custom-icon"></i>Log In | Register</a></li>
       <div id='login-collapse' style="display: none;">
           <li>
@@ -84,9 +85,6 @@
           <li>
             <a href="{% provider_login_url 'google' %}" class="sidebar-dropdown-custom-font sidebar-dropdown"><i class="fab fa-google sidebar-custom-icon"></i>Google</a>
           </li>
-          <!-- <li>
-            <a href="#" class="sidebar-dropdown-custom-font sidebar-dropdown"><i class="fab fa-twitter-square sidebar-custom-icon"></i>Instagram</a>
-          </li> -->
       </div>
       <li><a class='custom-dropdown-button sidebar-custom-font' data-toggle="category-collapse"><i class="fas fa-swatchbook sidebar-custom-icon"></i>Categories</a></li>
       <div id='category-collapse' style="display: none;">
@@ -125,7 +123,7 @@
             {% endblock heading %}
 
             {% block subheading %}
-            <span class="subheading">Subheading</span>
+            <span class="subheading"></span>
             {% endblock subheading %}
           </div>
         </div>
@@ -142,7 +140,7 @@
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
           <ul class="list-inline text-center">
-            <li class="list-inline-item">
+            <!-- <li class="list-inline-item">
               <a href="#">
                 <span class="fa-stack fa-lg">
                   <i class="fas fa-circle fa-stack-2x"></i>
@@ -165,7 +163,7 @@
                   <i class="fab fa-github fa-stack-1x fa-inverse"></i>
                 </span>
               </a>
-            </li>
+            </li> -->
           </ul>
           <p class="copyright text-muted">Copyright &copy; Blisstiful Journey 2020</p>
         </div>
