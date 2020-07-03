@@ -8,6 +8,7 @@ from django.core.mail import send_mail
 from django.contrib import messages
 from django.template.loader import render_to_string
 from django.http import JsonResponse
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 #Index page
 def index(request):
@@ -60,6 +61,14 @@ def about(request):
 
   return render(request, 'blog/about.html', context)
 
+def privacy_and_policy(request):
+  context = {
+  'categories' : Category.objects.all(),
+  'common_tags' : Post.tags.most_common(),
+  }
+
+  return render(request, 'blog/privacy_and_policy.html', context)
+
 #View/Comment/Reply Post
 def view_post(request, slug):
   post = Post.objects.get(slug=slug)
@@ -104,14 +113,24 @@ def view_post(request, slug):
   else:  
     return render(request, 'blog/post.html', context)
 
-#Category Detail
+#Category View Detail
 def view_category(request, slug):
   category = Category.objects.get(slug=slug)
   posts = Post.objects.filter(category=category).order_by('-date_posted')
+  paginator = Paginator(posts, 2)
+  page = request.GET.get('page')
+
+  try:
+      posts = paginator.page(page)
+  except PageNotAnInteger:
+      posts = paginator.page(1)
+  except EmptyPage:
+      posts = paginator.page(paginator.num_pages)
 
   context = {
     'category' : category,
     'posts' : posts,
+    'paginator' : paginator,
     'categories' : Category.objects.all(),
     'common_tags' : Post.tags.most_common(),
   }
@@ -121,11 +140,22 @@ def view_category(request, slug):
 def tagged(request, slug):
   tag = Tag.objects.get(slug=slug)
   posts = Post.objects.filter(tags=tag)
+  paginator = Paginator(posts, 2)
+  page = request.GET.get('page')
+
+  try:
+      posts = paginator.page(page)
+  except PageNotAnInteger:
+      posts = paginator.page(1)
+  except EmptyPage:
+      posts = paginator.page(paginator.num_pages)
+
 
   context = {
     'tag' : tag,
     'posts' : posts,
     'categories' : Category.objects.all(),
+    'paginator' : paginator,
   }
 
   return render(request, 'blog/tag_view.html', context)
@@ -148,6 +178,7 @@ def post_like(request, slug):
     'is_liked' : is_liked,
     'total_likes' : post.total_likes()
   }
+  
   if request.is_ajax():
     html = render_to_string('blog/post_likes.html', context, request=request)
     return JsonResponse({ 'form' : html })
@@ -155,4 +186,8 @@ def post_like(request, slug):
 
 #Update comments for posts
 def update_comment(request):
+  pass
+
+#Update replies for posts
+def update_replies(request):
   pass
