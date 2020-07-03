@@ -1,0 +1,31 @@
+{% load static %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-md-10 mx-auto">
+      <nav aria-label="Page navigation" > 
+        <ul class="pagination">
+          <li class="page-item">
+            {% if page.has_previous %}
+            <a class="page-link" href="?page={{page.previous_page_number}}"><span class="fas fa-caret-left"></span></a>
+            {% endif %}
+          </li>
+          <li class="page-item">
+            <a class="page-link">Page {{page.number}} of {{page.paginator.num_pages}}</a>
+          </li>
+          <li class="page-item">
+            {% if page.has_next %}
+            <a class="page-link" href="?page={{page.next_page_number}}"><span class="fas fa-caret-right"></span></a>
+            {% endif %}
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+<!-- when git commit use the below messages -->
+<!-- added pagination -->
+<!-- created privacy and policy page/url -->
+<!-- increased post content slice -->
