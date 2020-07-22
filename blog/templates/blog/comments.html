@@ -18,22 +18,37 @@
       </div>
       <br>
       <div>
+        <div class="view-comments-div">
+          <span class="comments-counter view-comments-btn color">
+            <i class="fas fa-comment-dots custom-icon"></i>See Comment{{comments|pluralize}} ({{ comments.count }})
+          </span>
+        </div>
         {% for comment in comments %}
-        <div class="card comment-card shadow-sm p-3 mb-5 bg-white rounded">
+        <div class="card comment-card shadow-lg p-3 mb-5 bg-white rounded" style="display: none;">
           <div class="card-body">
             <input data-comment-id={{comment.id}} class='comment-id' style='display: none;' />
             <h5 class="card-title">{{comment.author}}</h5>
             <h6 class="card-subtitle mb-2 text-muted">{{comment.date_posted}}</h6>
             <p class="card-text">{{comment.content}}</p>
-            {% if user.is_authenticated %}
-            <a class="card-link"><span class="reply-button fas fa-reply custom-reply-btn">Reply</span></a>
-            {% else %}
-            <a href="/accounts/login/"><span class="fas fa-sign-in-alt not-logged-a">You must sign in to leave a reply</span></a>
-            {% endif %}
+            <div class="view-replies-div">
+              {% if user.is_authenticated %}
+              <a class="card-link"><span class="reply-button fas fa-reply custom-reply-btn">Reply</span></a>
+              <div>
+                <span class="view-replies-btn">View</span>
+                <span class="view-replies-span">{{comment.replies.all.count}} reply{{comment.replies.all|pluralize}}</span>
+              </div>
+              {% else %}
+              <a href="/accounts/login/"><span class="fas fa-sign-in-alt not-logged-a">LogIn Required!</span></a>
+              <div>
+                <span class="view-replies-btn">View</span>
+                <span class="view-replies-span">{{comment.replies.all.count}} reply{{comment.replies.all|pluralize}}</span>
+              </div>
+              {% endif %}
+            </div>
             <hr>
             <div>
               {% for reply in comment.replies.all %}
-              <section class="reply-section">
+              <section class="reply-section" style="display: none;">
                 <h5 class="card-title ml-4 custom-h5">by- {{reply.author}}</h5>
                 <p class="card-text ml-4 custom-p">{{reply}}</p>
                 <h6 class="card-subtitle mb-2 text-muted ml-4 custom-h6">{{reply.date_posted}}</h6>

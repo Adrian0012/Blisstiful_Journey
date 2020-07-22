@@ -1,11 +1,26 @@
 $(document).ready(function() {
   $.ajaxSetup({
     beforeSend: function(xhr, settings) {
-        if (!this.crossDomain) {
-            xhr.setRequestHeader("X-CSRFToken", getCSRFToken());
-        }
+      if (!this.crossDomain) {
+        xhr.setRequestHeader("X-CSRFToken", getCSRFToken());
+      }
     }
-});
+  }
+  );
+  $('input').each((_index, input) => input.checked = false)  
+
+// Display Comments and Replies
+  $('.view-comments-btn').click(function(){
+    $('.comment-card').show();
+    $('.view-comments-btn').hide();
+  });
+
+// Close Sidemenu when clicking outsite
+  $('.sidebarMenuInner').click((e) => {
+    if ($(e)[0].originalEvent.target.dataset.toggle) { return }
+    $('input').each((_index, input) => input.checked = false)
+    $('#sidebarOverlay').hide();
+  } ) 
 
 // Comments and Replies handler
 assingHandlers = () => {
@@ -13,9 +28,26 @@ assingHandlers = () => {
     $(e.target).parents('.card-body').find('.reply-form').toggle()
   });
   
+  $('.reply-button').click(e => {
+    if ($(e.target).parents('.card-body').find('.reply-form').innerHTML === 'View');
+    console.log('ello')
+  });
+
   $('.comment-btn').click(function(){
     $('#comment-form').toggle();
+    $('.view-comments-btn').hide();
   });
+
+  $('.view-replies-btn').click(e => {
+    $(e.target).parents('.card-body').find('.reply-section').toggle()
+    const replyBtn = $(e.target)
+
+    replyBtn.html(
+      replyBtn.html() === 'View' ? 'Hide' : 'View'
+   )
+
+  });
+
 };
 
 assingHandlers();

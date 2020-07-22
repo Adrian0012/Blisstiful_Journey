@@ -74,7 +74,7 @@ def view_post(request, slug):
   post = Post.objects.get(slug=slug)
   comments = post.comments.filter(post=post, reply=None).order_by('-date_posted')
   common_tags = Post.tags.most_common()
-
+  
   is_liked = False
   if post.likes.filter(id=request.user.id).exists():
     is_liked = True
@@ -140,7 +140,7 @@ def view_category(request, slug):
 def tagged(request, slug):
   tag = Tag.objects.get(slug=slug)
   posts = Post.objects.filter(tags=tag)
-  paginator = Paginator(posts, 2)
+  paginator = Paginator(posts, 5)
   page = request.GET.get('page')
 
   try:
