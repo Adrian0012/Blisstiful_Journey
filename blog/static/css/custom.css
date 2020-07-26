@@ -1,5 +1,10 @@
 /* main CSS */
 
+/* momentum scrolling */
+*{
+  -webkit-overflow-scrolling: touch;
+}
+
 .comment-form-btn {
   width: 200px;
   font-size: 16px;
