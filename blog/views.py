@@ -21,8 +21,7 @@ def index(request):
   return render(request, 'blog/index.html', data)
 
 #Contact page
-def contact(request):
-  
+def contact(request):  
   if request.method == 'POST':
 
     contact_name = request.POST.get('contact-name') 
@@ -36,7 +35,7 @@ def contact(request):
     }
     send_mail(
       'Personal Message From: ' + contact_name, #subject
-      contact_message, #message
+      contact_message + '\n\n' + contact_email, #message
       contact_email, #from email
       ['Blisstiful.Journey@gmail.com'] #to email
     )
@@ -51,6 +50,37 @@ def contact(request):
     }
 
     return render(request, 'blog/contact.html', context)
+
+#Support page
+def support(request):
+  if request.method == 'POST':
+
+    contact_name = request.POST.get('contact-name') 
+    contact_email = request.POST.get('contact-email')
+    contact_message = request.POST.get('contact-message')
+
+    context = {
+      'contact_name': contact_name,
+      'contact_email': contact_email,
+      'contact_message': contact_message,
+    }
+    send_mail(
+      'Support Ticket From: ' + contact_name, #subject
+      contact_message + '\n\n' + contact_email, #message
+      contact_email, #from email
+      ['Blisstiful.Journey@gmail.com'] #to email
+    )
+
+    messages.success(request, 'Your ticket has been sent! We will get back to you shortly.')
+    return render(request, 'blog/support.html', context)
+
+  else:
+    context = {
+    'categories' : Category.objects.all(),
+    'common_tags' : Post.tags.most_common(),
+    }
+
+    return render(request, 'blog/support.html', context)
 
 #About page
 def about(request):

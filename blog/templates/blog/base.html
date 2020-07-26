@@ -5,26 +5,26 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
-
+  <head>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    
   <title>{% block title %} {% endblock title %} - Blisstiful Journey</title>
   <!-- Bootstrap + Core CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <link rel="stylesheet" href="{% static 'css/clean-blog.min.css'%}">
   <link rel="stylesheet" href="{% static 'css/custom.css'%}">
-
+  
   <!-- Custom fonts -->
   <!-- <script src="https://kit.fontawesome.com/9585b14e93.js" crossorigin="anonymous"></script> -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.1/css/all.css" integrity="sha384-xxzQGERXS00kBmZW/6qxqJPyxW3UR0BPsL4c8ILaIWXva5kFi7TxkIIaMiKtqV1Q" crossorigin="anonymous">
   <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
-
-  </head> 
+  
+</head> 
 <body>
   
   <!-- Navigation Logged IN-->
@@ -80,17 +80,17 @@
       <li><a href="/"><img src="{% static 'images/blisstiful-journey-logo.png'%}" style="width: 60px; height: 80px" alt="Blisstiful-Journey-Logo"></a></li>
       <li><a class='custom-dropdown-button sidebar-custom-font' data-toggle="login-collapse"><i class="fas fa-sign-in-alt sidebar-custom-icon"></i>Log In | Register</a></li>
       <div id='login-collapse' style="display: none;">
-          <li>
-            <a href="{% provider_login_url "facebook" method="oauth2" %}" class="sidebar-dropdown-custom-font sidebar-dropdown"><i class="fab fa-facebook-square sidebar-custom-icon"></i>Facebook</a>
-          </li>
+        <li>
+          <a href="{% provider_login_url "facebook" method="oauth2" %}" class="sidebar-dropdown-custom-font sidebar-dropdown"><i class="fab fa-facebook-square sidebar-custom-icon"></i>Facebook</a>
+        </li>
           <li>
             <a href="{% provider_login_url 'google' %}" class="sidebar-dropdown-custom-font sidebar-dropdown"><i class="fab fa-google sidebar-custom-icon"></i>Google</a>
           </li>
-      </div>
-      <li><a class='custom-dropdown-button sidebar-custom-font' data-toggle="category-collapse"><i class="fas fa-swatchbook sidebar-custom-icon"></i>Categories</a></li>
-      <div id='category-collapse' style="display: none;">
+        </div>
+        <li><a class='custom-dropdown-button sidebar-custom-font' data-toggle="category-collapse"><i class="fas fa-swatchbook sidebar-custom-icon"></i>Categories</a></li>
+        <div id='category-collapse' style="display: none;">
         {% for category in categories %}
-          <li>
+        <li>
             <a href="/category-detail/{{category.slug}}" class="sidebar-dropdown-custom-font sidebar-dropdown"><i class="fas fa-swatchbook sidebar-custom-icon"></i>{{category.name}}</a>
           </li>
         {% endfor %}
@@ -105,15 +105,16 @@
       </div>
       <li><a href="/contact" class="sidebar-custom-font"><i class="fas fa-envelope sidebar-custom-icon"></i>Contact</a></li>
       <li><a href="/about" class="sidebar-custom-font"><i class="fas fa-book-open sidebar-custom-icon"></i>About</a></li>
+      <li><a href="/support" class="sidebar-custom-font"><i class="fas fa-ticket-alt sidebar-custom-icon"></i>Support</a></li>
     </ul>
   </div>
-                     
+  
   {% endif %}
 
   <!-- Page Header -->
   {% block image %}
   <header class="masthead" id="index-img">
-  {% endblock image %}
+    {% endblock image %}
     <div class="overlay"></div>
     <div class="container">
       <div class="row">
@@ -122,7 +123,7 @@
             {% block heading %}
             <h1>Blisstiful Journey</h1>
             {% endblock heading %}
-
+            
             {% block subheading %}
             <span class="subheading"></span>
             {% endblock subheading %}
@@ -131,7 +132,7 @@
       </div>
     </div>
   </header>
-
+  
   {% block content %}  
   {% endblock content %}
   
@@ -146,18 +147,17 @@
                 <span class="custom-footer text-muted">
                   Terms, Conditions & Privacy Policy
                 </span>
-              </a>
-            </li><span class="text-muted" style="font-size: 12px;">/</span>
-            <li class="list-inline-item">
-              <a target="_blank" href="#">
+              </a><span class="custom-footer text-muted">/</span>
+              <a target="_blank" href="https://adrian0012.github.io/">
                 <span class="custom-footer text-muted">
-                  Support
+                  Designed and Developed by Adrian
                 </span>
               </a>
             </li>
           </ul>
-          <a target="_blank" href="https://adrian0012.github.io/"><p class="custom-signature text-muted">Designed and Developer by Adrian</p></a>
-          <p class="copyright text-muted">Copyright &copy; Blisstiful Journey 2020</p>
+          <div>
+            <p class="copyright text-muted">Copyright &copy; Blisstiful Journey 2020</p>
+          </div>
         </div>
       </div>
     </div>
