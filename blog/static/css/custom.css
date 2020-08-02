@@ -76,7 +76,7 @@
 }
 
 #index-img {
-  background-image: url('/static/images/index.jpg');
+  /* background-image: url('/static/images/index.jpg'); */
   background-position: center;
 }
 
