@@ -2,6 +2,7 @@
 {% load static %}
 {% block title %} Home {% endblock title %}
 {% load socialaccount %}
+{% load example %}
 
 {% block image %} 
 <header class="masthead" style="background-image: url({{post.image.url}})">
@@ -17,6 +18,8 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
+        <p><span>Author - {{post.author}}</span></p>
+        <p class="text-muted">{{post.content|readtime}} read</p>
         <p>{{post.content}}</p>
         <hr>
         <div class="card">
@@ -30,7 +33,7 @@
             {% if user.is_authenticated %}
             <a class="card-link"><span class="comment-btn fas fa-comments custom-comment-btn">Comment</span></a>
             {% else %}
-            <a href="/accounts/login/"><span class="fas fa-sign-in-alt not-logged-a">You must sign in to leave a comment</span></a>
+            <a href="/accounts/login/"><span class="fas fa-sign-in-alt not-logged-a">Comment</span></a>
             {% endif %}
           </div>
           <div class="card-footer text-muted">
