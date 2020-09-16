@@ -147,7 +147,7 @@ def view_post(request, slug):
 def view_category(request, slug):
   category = Category.objects.get(slug=slug)
   posts = Post.objects.filter(category=category).order_by('-date_posted')
-  paginator = Paginator(posts, 2)
+  paginator = Paginator(posts, 5)
   page = request.GET.get('page')
 
   try:
