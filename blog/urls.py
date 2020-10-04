@@ -1,6 +1,9 @@
 from django.urls import path
 from . import views
 
+from django.conf import settings
+from django.conf.urls.static import static
+
 urlpatterns = [
     path('', views.index, name='blog-index'),
     path('about/', views.about, name='blog-about'),
@@ -11,4 +14,4 @@ urlpatterns = [
     path('post/<slug:slug>/like/', views.post_like, name='blog-post-like'),
     path('category-detail/<slug:slug>/', views.view_category, name='view-category'),
     path('tags/<slug:slug>/', views.tagged, name='view-tag')
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
