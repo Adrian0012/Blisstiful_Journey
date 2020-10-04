@@ -1,8 +1,8 @@
 import os
 from decouple import config, Csv
 
-#AWS
-from bliss_blog.aws.conf import *
+#upload serve images and static from/to AWS
+# from bliss_blog.aws.conf import *
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -185,7 +185,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 
-# STATIC_URL = '/static/'
+STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'blog/static/'),
