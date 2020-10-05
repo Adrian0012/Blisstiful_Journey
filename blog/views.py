@@ -104,7 +104,7 @@ def view_post(request, slug):
   post = Post.objects.get(slug=slug)
   comments = post.comments.filter(post=post, reply=None).order_by('-date_posted')
   common_tags = Post.tags.most_common()
-  
+
   is_liked = False
   if post.likes.filter(id=request.user.id).exists():
     is_liked = True
@@ -134,7 +134,7 @@ def view_post(request, slug):
     'is_liked' : is_liked,
     'total_likes' : post.total_likes(),
     'categories' : Category.objects.all(),
-    'common_tags' : common_tags
+    'common_tags' : common_tags,
   }
 
   if request.is_ajax():

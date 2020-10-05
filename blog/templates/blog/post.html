@@ -3,6 +3,7 @@
 {% block title %} Home {% endblock title %}
 {% load socialaccount %}
 {% load example %}
+{% load social_share %}
 
 {% block image %} 
 <header class="masthead" style="background-image: url({{post.image.url}})">
@@ -35,8 +36,10 @@
           <div class="card-body">
             {% if user.is_authenticated %}
             <a class="card-link"><span class="comment-btn fas fa-comments custom-comment-btn">Comment</span></a>
+            <i class="fab fa-facebook-square share-link-icon"><a class="share-tag" href="https://www.facebook.com/sharer/sharer.php?u={{request.build_absolute_uri}}" target="_blank"> Share on Facebook</a></i>
             {% else %}
             <a href="/accounts/login/"><span class="fas fa-sign-in-alt not-logged-a">Comment</span></a>
+            <i class="fab fa-facebook-square share-link-icon"><a class="share-tag" href="https://www.facebook.com/sharer/sharer.php?u={{request.build_absolute_uri}}" target="_blank"> Share on Facebook</a></i>
             {% endif %}
           </div>
           <div class="card-footer">
@@ -52,3 +55,7 @@
 
 {% include "blog/comments.html" %}
 {% endblock content %}
+
+
+<!-- more social media share links -->
+<!-- https://github.com/codingforentrepreneurs/Guides/blob/master/all/social_share_links.md -->

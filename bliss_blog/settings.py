@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'blog.apps.BlogConfig',
     'storages',
     'taggit',
+    'django_social_share',
 ]
 
 MIDDLEWARE = [

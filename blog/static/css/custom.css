@@ -45,6 +45,8 @@
 
 .card-body {
   background-color: rgba(0,0,0,.03);
+  display: flex;
+  justify-content: space-between;
 }
 
 .card .comment-card {
@@ -236,6 +238,16 @@ ho
 
 .custom-header-color {
   color: rgba(252, 70, 107, 100);
+}
+
+.share-tag {
+  font-size: 15px;
+  color: rgba(252, 70, 107, 100);
+}
+
+.share-link-icon {
+  color: rgba(47, 188, 208, 100);
+  margin: 5px;
 }
 
 /* navbar & side-menu */
